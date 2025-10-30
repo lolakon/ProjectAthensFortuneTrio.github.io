@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Fortune Trio - Live Band Night</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset & Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #0a0a0a;
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(120, 0, 255, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 0, 200, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(0, 255, 255, 0.1) 0%, transparent 70%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Animated Grid Background */
+        .grid-bg {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 0, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+            z-index: 0;
+            opacity: 0.3;
+        }
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        /* Neon Glow Effect */
+        .neon-text {
+            text-shadow: 
+                0 0 5px currentColor,
+                0 0 10px currentColor,
+                0 0 20px currentColor,
+                0 0 40px currentColor,
+                0 0 80px currentColor;
+            animation: flicker 3s infinite alternate;
+        }
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.95; }
+            75% { opacity: 0.98; }
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 4rem 1rem 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 5.5rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #ff00ff, #00ffff, #ff00ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle {
+            font-size: 1.8rem;
+            color: #00ffff;
+            margin-top: 1rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        /* Main Content */
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        .event-card {
+            background: rgba(20, 20, 40, 0.6);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            backdrop-filter: blur(8px);
+            box-shadow: 
+                0 0 20px rgba(0, 255, 255, 0.2),
+                inset 0 0 20px rgba(255, 0, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .event-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 
+                0 0 30px rgba(0, 255, 255, 0.4),
+                0 0 50px rgba(255, 0, 255, 0.2);
+            border-color: #00ffff;
+        }
+
+        .date {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2rem;
+            color: #ff00ff;
+            margin-bottom: 1rem;
+        }
+        .time, .venue {
+            font-size: 1.4rem;
+            margin: 0.8rem 0;
+            color: #00ffff;
+        }
+        .details {
+            margin-top: 1.5rem;
+            line-height: 1.8;
+            color: #e0e0ff;
+        }
+
+        /* Band Members */
+        .band-members {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+        .member {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(40, 0, 80, 0.3);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 0, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        .member:hover {
+            background: rgba(0, 255, 255, 0.1);
+            border-color: #00ffff;
+            transform: scale(1.05);
+        }
+        .member h3 {
+            color: #ff00ff;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+        .role {
+            color: #00ffff;
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+
+        /* CTA Button */
+        .cta {
+            text-align: center;
+            margin: 3rem 0;
+        }
+        .btn-neon {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #fff;
+            background: linear-gradient(45deg, #ff00ff, #00ffff);
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: 
+                0 0 20px rgba(255, 0, 255, 0.6),
+                0 0 40px rgba(0, 255, 255, 0.4);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-neon:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 0 30px rgba(255, 0, 255, 0.8),
+                0 0 60px rgba(0, 255, 255, 0.6);
+        }
+        .btn-neon::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: 0.5s;
+        }
+        .btn-neon:hover::before {
+            left: 100%;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: #888;
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
+        }
+        footer a {
+            color: #00ffff;
+            text-decoration: none;
+        }
+        footer a:hover {
+            color: #ff00ff;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 3.5rem; }
+            .subtitle { font-size: 1.3rem; }
+            .date { font-size: 1.8rem; }
+            .band-members { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-bg"></div>
+
+    <header>
+        <h1 class="neon-text">FORTUNE TRIO</h1>
+        <p class="subtitle neon-text">Live Electro-Rock Experience</p>
+    </header>
+
+    <main>
+        <div class="event-card">
+            <div class="date neon-text">SATURDAY, NOV 15</div>
+            <div class="time">Doors: 8:00 PM | Show: 9:00 PM</div>
+            <div class="venue">Megaro Mousikhs Athinon • Downtown Athens City</div>
+            <div class="details">
+                <p>Get ready for an explosive night of synth-driven rock, pulsing lights, and raw energy. 
+                <strong>Fortune trio</strong> returns with their signature blend of 80s synthwave and modern alt-rock.</p>
+                <p>Featuring new tracks from the upcoming album <em>"Tsifsa rope"</em>.</p>
+            </div>
+        </div>
+
+        <h2 style="text-align:center; color:#00ffff; margin:2rem 0; font-family:'Orbitron',sans-serif;" class="neon-text">
+            THE BAND
+        </h2>
+
+        <div class="band-members">
+            <div class="member">
+                <h3 class="neon-text">EFTHIMIS</h3>
+                <p class="role">Lead Vocals & Bass</p>
+            </div>
+            <div class="member">
+                <h3 class="neon-text">KONSTANTINOS</h3>
+                <p class="role">Guitar & Backing Vocals</p>
+            </div>
+            <div class="member">
+                <h3 class="neon-text">POLYDOROS</h3>
+                <p class="role">Drums</p>
+            </div>
+            
+        </div>
+
+        <div class="cta">
+            <a href="#" class="btn-neon">GET TICKETS NOW</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2025 Fortune Trio | <a href="#">Contact</a> • <a href="#">Instagram</a> • <a href="#">Spotify</a></p>
+    </footer>
+</body>
+</html>
